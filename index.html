@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jintian Zhou's Portfolio</title>
+    <style>
+        /* Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #0088cc;
+        }
+        
+        /* Content Area */
+        main {
+            padding-top: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+        
+        /* Home */
+        .hero {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #0088cc;
+            color: #fff;
+            margin-bottom: 3rem;
+            border-radius: 5px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #fff;
+            color: #0088cc;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-2px);
+        }
+        
+        /* About Me */
+        .about {
+            display: flex;
+            margin-bottom: 3rem;
+        }
+        
+        .about-content {
+            flex: 2;
+            padding-right: 2rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 5px;
+        }
+        
+        /* Portfolio */
+        .portfolio-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #0088cc;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .portfolio-overlay h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Skills Section */
+        .skills-section {
+            margin-bottom: 3rem;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .skill-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #0088cc;
+        }
+        
+        /* Experience Section */
+        .experience-section {
+            margin-bottom: 3rem;
+        }
+        
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+        
+        .experience-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .experience-meta {
+            color: #777;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact Form */
+        .contact-section {
+            margin-bottom: 3rem;
+        }
+        
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-group:nth-child(3),
+        .form-group:nth-child(4) {
+            grid-column: span 2;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            grid-column: span 2;
+            padding: 0.8rem;
+            background-color: #0088cc;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #006699;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+            list-style: none;
+        }
+        
+        .social-icons li {
+            margin: 0 1rem;
+        }
+        
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #0088cc;
+        }
+        
+        .footer-text {
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .about {
+                flex-direction: column-reverse;
+            }
+            
+            .about-content {
+                padding-right: 0;
+                margin-top: 2rem;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group:nth-child(3),
+            .form-group:nth-child(4),
+            .submit-btn {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Jintian Zhou</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home -->
+        <section id="home" class="hero">
+            <h1>Jintian (Savery) Zhou</h1>
+            <p>Computer Science Student | Software Developer</p>
+            <a href="#portfolio" class="btn">View My Work</a>
+        </section>
+
+        <!-- About Me -->
+        <section id="about" class="about">
+            <div class="about-content">
+                <h2 class="section-title">About Me</h2>
+                <p>I am a Computer Science student at the University of Waterloo with a passion for software development. I have strong skills in Java and Python, as well as a deep understanding of computer science fundamentals including data structures and algorithms.</p>
+                <p>I've achieved recognition in multiple competitions, including the top 25% in the Canadian Senior Mathematics Contest, Euclid Mathematics Contest, and Canadian Computing Competition (Senior Division).</p>
+                <p>With excellent interpersonal and communication skills demonstrated through my tutoring experience and library work, I am well-equipped to collaborate effectively in any software development environment.</p>
+                <p>I am currently pursuing my Honours Bachelor of Computer Science degree at the University of Waterloo with a GPA of 92/100.</p>
+            </div>
+            <div class="about-image">
+                <img src="images/my_photo.jpg" alt="Jintian Zhou" class="profile-img">
+            </div>
+        </section>
+
+        <!-- Portfolio -->
+        <section id="portfolio" class="portfolio-section">
+            <h2 class="section-title">My Projects</h2>
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/300/250" alt="Amazon Web Scraper" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3>Amazon Web Scraper</h3>
+                        <p>A Python-based web scraper that tracks price changes of selected products on Amazon using BeautifulSoup and requests libraries.</p>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/300/250" alt="Lottery Simulation" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3>Lottery Simulation</h3>
+                        <p>A Java-based lottery system with input validation, duplicate checks, and object-oriented programming principles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills -->
+        <section id="skills" class="skills-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Technical Skills</h3>
+                    <ul class="skill-list">
+                        <li>Java</li>
+                        <li>Python</li>
+                        <li>Racket</li>
+                        <li>SQL</li>
+                        <li>C</li>
+                        <li>C++</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>BeautifulSoup</li>
+                        <li>Pandas</li>
+                        <li>Matplotlib</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Communication</h3>
+                    <ul class="skill-list">
+                        <li>Fluent in English</li>
+                        <li>Fluent in Mandarin</li>
+                        <li>Technical Documentation</li>
+                        <li>Tutoring</li>
+                        <li>Presentation Skills</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="experience-section">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-item">
+                <h3 class="experience-title">Math Tutor</h3>
+                <p class="experience-meta">Self-Employed, Remote | January 2024 - August 2024</p>
+                <ul class="skill-list">
+                    <li>Conducted over 300 hours of online tutoring for A-Level Mathematics, Advanced Mathematics, and Physics</li>
+                    <li>Delivered 1:1 tutoring sessions to 20+ students via Zoom</li>
+                    <li>Developed personalized learning plans leading to 30% improvement in academic performance</li>
+                    <li>Provided weekly progress reports and consultations, helping multiple students achieve A/A* grades</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3 class="experience-title">Library Volunteer</h3>
+                <p class="experience-meta">Nanshan Library, Shenzhen, China | June 2023
